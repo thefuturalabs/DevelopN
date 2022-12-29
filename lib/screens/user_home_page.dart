@@ -1,3 +1,4 @@
+import 'package:develop_n/screens/view_idea.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -15,7 +16,14 @@ class UserHomePage extends StatelessWidget {
             subtitle: const Text('Project owner name'),
             trailing: ElevatedButton(
               child: const Text('View'),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ViewIdea(),
+                  ),
+                );
+              },
             ),
           ),
         );
