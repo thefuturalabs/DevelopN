@@ -57,7 +57,7 @@ class PaymentScreen extends StatelessWidget {
                                   onPressed: () {
                                     launchUrl(
                                       Uri.parse(
-                                        'upi://pay?pa=${upiController.text}&pn=Shanu&am=200.00&cu=INR&aid=uGICAgICNgb2BfQ',
+                                        'upi://pay?pa=${upiController.text}&pn=Dev&am=200.00&cu=INR&aid=uGICAgICNgb2BfQ',
                                       ),
                                       mode: LaunchMode
                                           .externalNonBrowserApplication,

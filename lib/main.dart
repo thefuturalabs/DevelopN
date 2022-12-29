@@ -1,3 +1,4 @@
+import 'package:develop_n/screens/login_page.dart';
 import 'package:develop_n/screens/service_provider_home_page.dart';
 import 'package:develop_n/screens/user_home_page.dart';
 
@@ -16,10 +17,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'DevelopN',
       theme: ThemeData(
+        scaffoldBackgroundColor:  const Color.fromARGB(255, 48, 102, 145),
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
       ),
-      home:UserHomePage(),
+      home:LoginPage(),
     );
   }
 }
