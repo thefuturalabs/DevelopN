@@ -1,5 +1,6 @@
 import 'package:develop_n/screens/add_idea_page.dart';
 import 'package:develop_n/widgets/idea_list.dart';
+import 'package:develop_n/widgets/request_list.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/service_provider_drawer.dart';
@@ -29,7 +30,9 @@ class ServiceProviderHomePage extends StatelessWidget {
         drawer: ServiceProviderDrawer(),
         body: TabBarView(children: [
           IdeaList(allIdeas: false),
-          Icon(Icons.add),
+          RequestList(
+            
+          ),
         ]),
         // ListView.builder(
         //     itemCount: 20,
