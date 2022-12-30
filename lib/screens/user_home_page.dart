@@ -15,12 +15,12 @@ class UserHomePage extends StatelessWidget {
             trailing: ElevatedButton(
               child: const Text('View'),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ViewIdea(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (_) => ViewIdea(),
+                //   ),
+                // );
               },
             ),
           ),

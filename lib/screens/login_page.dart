@@ -1,18 +1,20 @@
 import 'package:develop_n/screens/provider_registration_page.dart';
+import 'package:develop_n/screens/service_provider_home_page.dart';
 import 'package:develop_n/screens/user_home_page.dart';
 import 'package:develop_n/screens/user_registration.dart';
 import 'package:develop_n/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
   final fkey = GlobalKey<FormState>();
 
-  TextEditingController usernameController=TextEditingController();
-  TextEditingController passwordaController=TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class LoginPage extends StatelessWidget {
               child: Lottie.asset('assets/bulb.json'),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: TextFormField(
                 controller: usernameController,
                 validator: (value) {
@@ -58,7 +60,7 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: TextFormField(
                 controller: passwordaController,
                 validator: (value) {
@@ -77,20 +79,8 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 30),
               child: InkWell(
-                onTap: () async{
-                  if (fkey.currentState!.validate()) {
-                   Map data=await Services.postData({'username':usernameController.text,'password':passwordaController.text}, 'login.php');
-                   print(data);
-                   if(data['message']!='Failed to LogIn'){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => UserHomePage(),
-                      ),
-                    );}else{
-                      Fluttertoast.showToast(msg: 'Something went wrong',backgroundColor: ThemeData().backgroundColor);
-                    }
-                  }
+                onTap: () {
+                  login(context);
                 },
                 onLongPress: () {
                   Navigator.push(
@@ -118,7 +108,7 @@ class LoginPage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-               showRegistrationDialog(context);
+                showRegistrationDialog(context);
               },
               child: Text(
                 'SignUp instead',
@@ -129,6 +119,38 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  login(BuildContext context) async {
+    if (fkey.currentState!.validate()) {
+      Map data = await Services.postData({
+        'username': usernameController.text,
+        'password': passwordaController.text
+      }, 'login.php');
+      print(data);
+      if (data['message'] != 'Failed to LogIn') {
+        SharedPreferences spref = await SharedPreferences.getInstance();
+        spref.setString('userId', data['patient_id']);
+        if(data['type']=='provider'){
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ServiceProviderHomePage(),
+          ),
+        );  
+        }else{
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => UserHomePage(),
+          ),
+        );}
+      } else {
+        Fluttertoast.showToast(
+            msg: 'Something went wrong',
+            backgroundColor: ThemeData().backgroundColor);
+      }
+    }
   }
 
   showRegistrationDialog(BuildContext context) async {
@@ -150,9 +172,9 @@ class LoginPage extends StatelessWidget {
               },
               child: Text('Idea Provider'),
             ),
-              TextButton(
+            TextButton(
               onPressed: () {
-                 Navigator.push(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) => UserRegistration(),

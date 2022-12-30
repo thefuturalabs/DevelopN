@@ -2,12 +2,13 @@ import 'package:develop_n/screens/payment_scree.dart';
 import 'package:flutter/material.dart';
 
 class ViewIdea extends StatelessWidget {
-  const ViewIdea({super.key});
-
+   ViewIdea({super.key,required this.data});
+Map data;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      appBar: AppBar(),
+      // drawer: Drawer(),
       body: SingleChildScrollView(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -15,7 +16,7 @@ class ViewIdea extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Idea title',
+              data['title'],
               style: TextStyle(
                 fontSize: 30,
               ),
@@ -24,39 +25,42 @@ class ViewIdea extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.''',
+             data['idea']
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              '\$200',
-              style: TextStyle(
-                fontSize: 25,
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => PaymentScreen(),
-                    ),
-                  );
-                },
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'BUY',
+                  data['price'],
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 25,
                   ),
+                ),
+              ),
+              Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => PaymentScreen(),
+                  ),
+                );
+              },
+              child: Text(
+                'BUY',
+                style: TextStyle(
+                  fontSize: 22,
                 ),
               ),
             ),
           )
+            ],
+          ),
+          
         ],
       )),
     );

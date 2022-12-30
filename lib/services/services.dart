@@ -8,12 +8,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Services {
-  static postData(Map params, String endPoint) async {
+  static Future<dynamic> postData(Map params, String endPoint) async {
     Response res = await post(
       Uri.parse(Constants.baseUrl + endPoint),
       body: params,
     );
-    print(res.body);
+    print('response>>>${res.body}');
     return jsonDecode(res.body);
   }
 

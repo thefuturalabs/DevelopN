@@ -1,5 +1,6 @@
 import 'package:develop_n/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddIdeaPage extends StatelessWidget {
   AddIdeaPage({super.key});
@@ -62,7 +63,7 @@ class AddIdeaPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: ElevatedButton(
-                onPressed: addIdea,
+                onPressed: (){addIdea(context);},
                 child: const Text('Submit Idea'),
               ),
             ),
@@ -72,15 +73,18 @@ class AddIdeaPage extends StatelessWidget {
     );
   }
 
-  
 
-  addIdea()async{
+  addIdea(BuildContext cotnext)async{
     String? uid=await Services.getUserId();
-    Services.postData({
-      'id':uid??'2',
+    Map data=await Services.postData({
+      'provider_id':uid??'2',
       'title':titleController.text,
       'idea':ideaController.text,
       'price': priceController.text,
     }, 'add_idea.php');
+    if(data['result']=='done'){
+      Fluttertoast.showToast(msg: 'Idea added successfully');
+      Navigator.pop(cotnext);
+    }
   }
 }
