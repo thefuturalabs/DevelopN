@@ -1,9 +1,12 @@
+import 'package:develop_n/services/services.dart';
 import 'package:flutter/material.dart';
 
 class AddIdeaPage extends StatelessWidget {
   AddIdeaPage({super.key});
 
   TextEditingController titleController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController ideaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class AddIdeaPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              controller: titleController,
+              controller: ideaController,
               maxLines: 5,
               decoration: const InputDecoration(
                 label: Text('details'),
@@ -45,7 +48,7 @@ class AddIdeaPage extends StatelessWidget {
               width: 150,
               child: TextField(
                 keyboardType: TextInputType.number,
-                controller: titleController,
+                controller: priceController,
                 decoration: const InputDecoration(
                   label: Text('price'),
                   border: OutlineInputBorder(),
@@ -59,7 +62,7 @@ class AddIdeaPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: addIdea,
                 child: const Text('Submit Idea'),
               ),
             ),
@@ -67,5 +70,17 @@ class AddIdeaPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  
+
+  addIdea()async{
+    String? uid=await Services.getUserId();
+    Services.postData({
+      'id':uid??'2',
+      'title':titleController.text,
+      'idea':ideaController.text,
+      'price': priceController.text,
+    }, 'add_idea.php');
   }
 }

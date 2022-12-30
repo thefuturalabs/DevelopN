@@ -1,6 +1,9 @@
+import 'package:develop_n/screens/provider_registration_page.dart';
 import 'package:develop_n/screens/user_home_page.dart';
 import 'package:develop_n/screens/user_registration.dart';
+import 'package:develop_n/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatelessWidget {
@@ -8,9 +11,13 @@ class LoginPage extends StatelessWidget {
 
   final fkey = GlobalKey<FormState>();
 
+  TextEditingController usernameController=TextEditingController();
+  TextEditingController passwordaController=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 48, 102, 145),
       body: Form(
         key: fkey,
@@ -38,6 +45,7 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
               child: TextFormField(
+                controller: usernameController,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'enter username';
@@ -52,6 +60,7 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
               child: TextFormField(
+                controller: passwordaController,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'enter password';
@@ -68,14 +77,19 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 30),
               child: InkWell(
-                onTap: () {
+                onTap: () async{
                   if (fkey.currentState!.validate()) {
+                   Map data=await Services.postData({'username':usernameController.text,'password':passwordaController.text}, 'login.php');
+                   print(data);
+                   if(data['message']!='Failed to LogIn'){
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (_) => UserHomePage(),
                       ),
-                    );
+                    );}else{
+                      Fluttertoast.showToast(msg: 'Something went wrong',backgroundColor: ThemeData().backgroundColor);
+                    }
                   }
                 },
                 onLongPress: () {
@@ -126,7 +140,14 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ProviderRegistration(),
+                  ),
+                );
+              },
               child: Text('Idea Provider'),
             ),
               TextButton(
