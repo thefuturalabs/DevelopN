@@ -1,9 +1,12 @@
 import 'package:develop_n/screens/payment_scree.dart';
+import 'package:develop_n/screens/user_chat_page.dart';
+import 'package:develop_n/services/services.dart';
 import 'package:flutter/material.dart';
 
 class ViewIdea extends StatelessWidget {
-   ViewIdea({super.key,required this.data});
+   ViewIdea({super.key,required this.data,required this.byUser});
 Map data;
+bool byUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,11 +45,30 @@ Map data;
               ),
               Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if(byUser) ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => PaymentScreen(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'CHAT',
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+              onPressed: () async{
+                String userId= await Services.getUserId()??'2';
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => PaymentScreen(),
+                    builder: (_) => UserChatPage(recieverId: data['provider_id'],senderId:userId ),
                   ),
                 );
               },
@@ -56,6 +78,8 @@ Map data;
                   fontSize: 22,
                 ),
               ),
+            )
+              ],
             ),
           )
             ],

@@ -19,18 +19,16 @@ class _IdeaListState extends State<IdeaList> {
       String uid = await Services.getUserId() ?? '2';
       data = await Services.postData({'provider_id': uid}, 'view_idea.php');
     }
-      print('data in widgets $data');
+    print('data in widgets $data');
     return data;
   }
 
   @override
   Widget build(BuildContext context) {
-    double height=MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     return RefreshIndicator(
-      onRefresh: ()async{
-        setState(() {
-          
-        });
+      onRefresh: () async {
+        setState(() {});
       },
       child: FutureBuilder(
           future: getIdea(),
@@ -40,24 +38,32 @@ class _IdeaListState extends State<IdeaList> {
               return Center(child: CircularProgressIndicator());
             } else if (snap.hasData) {
               return ListView.builder(
-                itemCount: (snap.data as List).length,
-                itemBuilder: (_, index) {
-                return Card(
-                  child: InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>ViewIdea(data: snap.data![index]),),);
-                      // ViewIdea();
-                    },
-                    child: ListTile(
-                      leading: Icon(Icons.lightbulb),
-                      title: Text((snap.data as List) [index]['title']),
-                    ),
-                  ),
-                );
-              });
+                  itemCount: (snap.data as List).length,
+                  itemBuilder: (_, index) {
+                    return Card(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ViewIdea(
+                                data: snap.data![index],
+                                byUser: widget.allIdeas,
+                              ),
+                            ),
+                          );
+                          // ViewIdea();
+                        },
+                        child: ListTile(
+                          leading: Icon(Icons.lightbulb),
+                          title: Text((snap.data as List)[index]['title']),
+                        ),
+                      ),
+                    );
+                  });
             } else {
               return Padding(
-                padding:  EdgeInsets.only(top: height/2-100),
+                padding: EdgeInsets.only(top: height / 2 - 100),
                 child: Text('Something went wrong'),
               );
             }

@@ -131,6 +131,7 @@ class LoginPage extends StatelessWidget {
       if (data['message'] != 'Failed to LogIn') {
         SharedPreferences spref = await SharedPreferences.getInstance();
         spref.setString('userId', data['patient_id']);
+        spref.setString('type', data['type']);
         if(data['type']=='provider'){
         Navigator.push(
           context,

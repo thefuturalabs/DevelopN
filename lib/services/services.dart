@@ -79,4 +79,10 @@ params.entries.forEach((element) {
     print('user id: ${uid??"not found"}');
     return spref.getString('userId');
   }
+  static Future<String?> getUserType()async{
+    SharedPreferences spref=await SharedPreferences.getInstance();
+    String? uid=spref.getString('type');
+    print('user type: ${uid??"not found"}');
+    return spref.getString('type');
+  }
 }
