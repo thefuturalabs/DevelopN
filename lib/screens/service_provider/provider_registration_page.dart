@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:develop_n/screens/user_home_page.dart';
+import 'package:develop_n/screens/login_page.dart';
+import 'package:develop_n/screens/user/user_home_page.dart';
 import 'package:develop_n/services/services.dart';
 import 'package:flutter/material.dart';
 
@@ -268,7 +269,14 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                   Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => LoginPage(),
+                      ),
+                    );
+                },
                 child: Text(
                   'Login instead',
                   style: TextStyle(color: Colors.white),

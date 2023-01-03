@@ -8,6 +8,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Services {
+
+static Future<bool> isNotificationRead()async{
+  SharedPreferences spref=await SharedPreferences.getInstance();
+   int number= spref.getInt('noti')??0;
+  final data= await Services.getData('view_notification.php');
+return data.length==number;
+}
+
   static Future<dynamic> postData(Map params, String endPoint) async {
     Response res = await post(
       Uri.parse(Constants.baseUrl + endPoint),
@@ -35,8 +43,10 @@ params.entries.forEach((element) {
       image.path,
       // contentType: new MediaType('application', 'x-tar'),
     ));
-    request.send().then((response) {
+    request.send().then((response) async{
       if (response.statusCode == 200) print("Uploaded!");
+      final data=await Response.fromStream(response);
+      print(data.body);
     });
   }
 

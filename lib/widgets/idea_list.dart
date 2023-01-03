@@ -18,6 +18,9 @@ class _IdeaListState extends State<IdeaList> {
     if (!widget.allIdeas) {
       String uid = await Services.getUserId() ?? '2';
       data = await Services.postData({'provider_id': uid}, 'view_idea.php');
+    }else{
+      String uid = await Services.getUserId() ?? '2';
+      data = await Services.getData( 'view_all_idea.php');
     }
     print('data in widgets $data');
     return data;

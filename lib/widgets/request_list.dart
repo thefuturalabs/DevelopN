@@ -61,32 +61,43 @@ class _RequestListState extends State<RequestList> {
                           leading: Icon(Icons.download),
                           title: Text((snap.data as List)[index]['name']),
                           subtitle: Text((snap.data as List)[index]['title']),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  acceptOrRejectRequest(
-                                      reqId: (snap.data as List)[index]
-                                          ['req_id'],
-                                      accept: true);
-                                },
-                                child: Text('accept'),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  acceptOrRejectRequest(
-                                      reqId: (snap.data as List)[index]
-                                          ['req_id'],
-                                      accept: false);
-                                },
-                                child: Text('reject'),
-                              ),
-                            ],
-                          ),
+                          trailing: (snap.data as List)[index]['status'] == '0'
+                              ? Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    MaterialButton(
+                                      color: Colors.green,
+                                      onPressed: () {
+                                        acceptOrRejectRequest(
+                                            reqId: (snap.data as List)[index]
+                                                ['req_id'],
+                                            accept: true);
+                                      },
+                                      child: Text('accept'),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    MaterialButton(
+                                      color: Colors.red,
+                                      onPressed: () {
+                                        acceptOrRejectRequest(
+                                            reqId: (snap.data as List)[index]
+                                                ['req_id'],
+                                            accept: false);
+                                      },
+                                      child: Text('reject'),
+                                    ),
+                                  ],
+                                )
+                              : MaterialButton(
+                                color:(snap.data as List)[index]['status'] == '1'?Colors.green:Colors.red ,
+                                  onPressed: () {},
+                                  child: Text(
+                                      (snap.data as List)[index]['status'] == '1'
+                                          ? 'Accepted'
+                                          : 'Rejected'),
+                                ),
                         ),
                       ),
                     );

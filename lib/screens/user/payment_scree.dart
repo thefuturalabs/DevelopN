@@ -1,9 +1,14 @@
+import 'package:develop_n/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PaymentScreen extends StatelessWidget {
-  PaymentScreen({super.key});
-
+  PaymentScreen({super.key, required this.ideaId, required this.providerId,required this.price});
+  String ideaId;
+  String providerId;
+  String price;
   final fkey = GlobalKey<FormState>();
   TextEditingController upiController = TextEditingController();
 
@@ -19,7 +24,7 @@ class PaymentScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(40),
                 child: Text(
-                  '\$200',
+                  '₹$price',
                   style: TextStyle(fontSize: 60),
                 ),
               ),
@@ -54,14 +59,18 @@ class PaymentScreen extends StatelessWidget {
                               ),
                               actions: [
                                 TextButton(
-                                  onPressed: () {
-                                    launchUrl(
+                                  onPressed: () async {
+                                    await launchUrl(
                                       Uri.parse(
-                                        'upi://pay?pa=${upiController.text}&pn=Dev&am=200.00&cu=INR&aid=uGICAgICNgb2BfQ',
+                                        'upi://pay?pa=${upiController.text}&pn=Dev&am=$price.00&cu=INR&aid=uGICAgICNgb2BfQ',
                                       ),
                                       mode: LaunchMode
                                           .externalNonBrowserApplication,
                                     );
+                                    Future.delayed(Duration(seconds: 5))
+                                        .then((value) {
+                                      requestIdea();
+                                    });
                                   },
                                   child: Text('Submit'),
                                 ),
@@ -72,15 +81,25 @@ class PaymentScreen extends StatelessWidget {
                     child: Text('upi')),
               ),
               SizedBox(
-                width: double.infinity,
+                  width: double.infinity,
                   child: ElevatedButton(
-                onPressed: null,
-                child: Text('Bank transfer'),
-              )),
+                    onPressed: null,
+                    child: Text('Bank transfer'),
+                  )),
             ],
           ),
         ),
       ),
     );
+  }
+
+  requestIdea() async {
+    String uid = await Services.getUserId() ?? '2';
+    final data = await Services.postData(
+        {'provider_id': providerId, 'user_id': uid, 'idea_id': ideaId},
+        'add_request.php');
+        if(data['result']=='Added...'){
+          Fluttertoast.showToast(msg: 'Idea requested');
+        }
   }
 }

@@ -1,9 +1,9 @@
-import 'package:develop_n/screens/add_idea_page.dart';
+import 'package:develop_n/screens/service_provider/add_idea_page.dart';
 import 'package:develop_n/widgets/idea_list.dart';
 import 'package:develop_n/widgets/request_list.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/service_provider_drawer.dart';
+import '../../widgets/service_provider_drawer.dart';
 
 class ServiceProviderHomePage extends StatelessWidget {
   const ServiceProviderHomePage({super.key});
