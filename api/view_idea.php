@@ -13,7 +13,7 @@ if ($sql->num_rows > 0) {
 
     $myarray['title'] = $row['title'];
     $myarray['idea_id'] = $row['idea_id'];
-    $myarray['idea_id'] = $row['idea'];
+    $myarray['idea'] = $row['idea'];
     $myarray['price'] = $row['price'];
     $myarray['provider_id'] = $row['provider_id'];
 

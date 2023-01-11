@@ -21,7 +21,7 @@ if ($sql->num_rows > 0) {
   }
 } else {
 
-  $myarray['value'] = 0;
+
   $myarray['message'] = 'Failed to View';
 
   array_push($list, $myarray);

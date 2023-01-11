@@ -1,22 +1,12 @@
 <?php
-session_start();
 include 'Login_v1/connection.php';
-$dd=mysqli_query($con,"select * from login where type = 'admin'");
-$d = mysqli_fetch_assoc($dd);
-
-
-$login = $_SESSION['log'];
 if(isset($_POST['submit'])){
-    $user = $_POST['user'];
-    $pass = $_POST['pass'];
-
-   $data = mysqli_query($con,"update login set username='$user',password='$pass' where login_id = '$login'");
-if($data){
-    echo "<script>alert('Successfully Updated');</script>";
-}
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    mysqli_query($con,"insert into notification(title,notification)values('$title','$content')");
+    header("location:view_notification.php");
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,51 +66,75 @@ if($data){
   </div>
 
   <!-- ======= Header ======= -->
-  <?php
-  include 'header.php';
-  ?>
-  <!-- End Header -->
+ <?php
+include 'header.php';
+ ?>
 
   <!-- ======= Hero Section ======= -->
- <br><br><br>
+<!-- End Hero -->
 
   <main id="main">
 
-    <!-- ======= About Section ======= -->
-    <br><br><br><br>
+ 
+    <!-- ======= Events Section ======= -->
+
 
     <!-- ======= Book A Table Section ======= -->
-    <section id="book-a-table" class="book-a-table">
+    
+    <!-- ======= Testimonials Section ======= -->
+ 
+
+    <!-- ======= Gallery Section ======= -->
+ 
+    <!-- ======= Chefs Section ======= -->
+   
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Admin</h2>
-          <p>Update Details</p>
+            <br><br><br>
+          <h2>ADD</h2>
+          <p>Notification</p>
+        </div>
+      </div>
+
+     
+      <div class="container" data-aos="fade-up">
+
+        <div class="row mt-5">
+
+         
+
+          <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form method="post" role="form" class="">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="title" class="form-control" id="name" placeholder="title" required>
+                </div>
+               
+              </div>
+              
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="content" rows="8" placeholder="content" required></textarea>
+              </div><br><br>
+            
+              <div class="text-center"><button name="submit" class="btn btn-warning" type="submit">Add Notification</button></div>
+            </form>
+
+          </div>
+
         </div>
 
-        <form  method="post" role="form" class="" data-aos="fade-up"  data-aos-delay="100">
-          <div class="row">
-            <div class="col-lg-4 col-md-6 form-group">
-              <input type="text" name="user" class="form-control" value="<?php echo $d['username'] ?>" id="name" placeholder="Username" >
-              <div class="validate"></div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-              <input type="password" class="form-control" name="pass" id="" value="<?php echo $d['password'] ?>" placeholder="Password" data-rule="">
-              <div class="validate"></div>
-            </div>
-           
-         <br><br><br>
-          
-          <div class="text-left"><button type="submit" name="submit" class="btn btn-warning">Update</button></div>
-        </form>
-
       </div>
-    </section><!-- End Book A Table Section -->
+    </section><!-- End Contact Section -->
 
-<!-- End Footer -->
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+ 
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

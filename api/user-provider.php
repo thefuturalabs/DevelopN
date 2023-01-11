@@ -12,13 +12,14 @@ $query1=mysqli_query($con,"insert into chat(provider_id,user_id, message)VALUES(
 
 if($query1)
 {
-	echo "message send Successfully...";
+	$myarray['result'] = "message send Successfully";
+
 }
 
 else
 {
 
-	echo "Updation Failed!";
+	$myarray['result'] = "failed";
 }
-
+echo json_encode($myarray);
 ?>

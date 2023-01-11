@@ -8,12 +8,12 @@
   <nav id="navbar" class="navbar order-last order-lg-0">
     <ul>
       <li><a class="nav-link scrollto active" href="home.php">Home</a></li>
-      <li><a class="nav-link scrollto" href="#about">About</a></li>
-      <li><a class="nav-link scrollto" href="profile.php">Profile</a></li>
+      <li><a class="nav-link scrollto" href="add-notification.php">Add Notification</a></li>
+      <li><a class="nav-link scrollto" href="profile.php">Update Credentials</a></li>
       <!-- <li><a class="nav-link scrollto" href="#specials">Update Details</a></li> -->
       <li><a class="nav-link scrollto" href="approve.php">Approve Service Providers</a></li>
-      
-      <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+      <li><a class="nav-link scrollto" href="logout.php">Logout</a></li>
+
     </ul>
     <i class="bi bi-list mobile-nav-toggle"></i>
   </nav><!-- .navbar -->

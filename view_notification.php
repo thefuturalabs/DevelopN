@@ -1,6 +1,6 @@
 <?php
 include 'Login_v1/connection.php';
-$data = mysqli_query($con, "select * from providers");
+$data = mysqli_query($con, "select * from notification");
 ?>
 
 <!DOCTYPE html>
@@ -76,26 +76,31 @@ $data = mysqli_query($con, "select * from providers");
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Approve</h2>
-                    <p>Service Providers</p>
+                    <h2></h2>
+                    <p>Notifications</p>
                 </div>
 
-               
+                <div class="row" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-lg-12 d-flex justify-content-center">
+                       
+                    </div>
+                </div>
+
                 <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
                     <?php
-                    $count=0;
+                    $count = 0;
                     while ($row = mysqli_fetch_assoc($data)) {
                         $count++;
                     ?>
 
                         <div class="col-lg-6 menu-item filter-starters">
-
-                         <!-- <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt=""> -->
-                            <div class="menu-content">
-                                <a href="#"><?php echo $count; ?> <?php echo ")" ?> <?php echo $row['name'] ?></a><span><a href="view_providers.php?id=<?php echo $row['provider_id'] ?>" class="btn btn-warning">View</a></span>
+                        
+                            <!-- <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt=""> -->
+                            <div class="">
+                                <a href="#"><?php echo $count; ?> <?php echo ")" ?> <?php echo $row['title'] ?></a><span></span>
                             </div>
-                            <div class="menu-ingredients">
-                                <?php echo $row['email'] ?>
+                            <div class="">
+                                <?php echo $row['notification'] ?>
                             </div>
                         </div>
 

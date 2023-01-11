@@ -2,14 +2,14 @@
 
 include '../Login_v1/connection.php';
 
-$sql = mysqli_query($con, "SELECT * FROM feedback");
+$sql = mysqli_query($con, "SELECT * FROM feedback join user on user.login_id =feedback.user_id");
 $list = array();
 
 if ($sql->num_rows > 0) {
 
   while ($row = mysqli_fetch_assoc($sql)) {
 
-    $myarray['user_id'] = $row['user_id'];
+    $myarray['user'] = $row['name'];
     $myarray['feedback'] = $row['feedback'];
    
 

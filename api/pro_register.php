@@ -19,18 +19,10 @@ $pic = $_FILES['image']['name'];
 
         $file1 = rand();
         $file_ext = $filearray["extension"];
-
-
-
-
         $filenew = $file1 . "." . $file_ext;
         move_uploaded_file($_FILES['image']['tmp_name'], "../img/" . $filenew);
-        // var_dump($filenew);exit();
     } 
-    else {
-        echo "<script>alert('Please try again...!')</script>";
-    }
-
+    
 
 $query = mysqli_query($con, "INSERT INTO login(`username`,`password`,`type`) VALUES('$username','$password','provider')");
 $last_login_id = mysqli_insert_id($con);
