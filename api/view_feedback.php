@@ -2,7 +2,7 @@
 
 include '../Login_v1/connection.php';
 
-$sql = mysqli_query($con, "SELECT * FROM feedback join user on user.login_id =feedback.user_id");
+$sql = mysqli_query($con, "SELECT * FROM feedback join user on user.login_id = feedback.user_id");
 $list = array();
 
 if ($sql->num_rows > 0) {
