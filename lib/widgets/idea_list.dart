@@ -40,6 +40,9 @@ class _IdeaListState extends State<IdeaList> {
             if (snap.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             } else if (snap.hasData) {
+              if(snap.data.first['message']=='Failed to View'){
+                return Center(child: Text('Nothing here to view'));
+              }else{
               return ListView.builder(
                   itemCount: (snap.data as List).length,
                   itemBuilder: (_, index) {
@@ -63,7 +66,7 @@ class _IdeaListState extends State<IdeaList> {
                         ),
                       ),
                     );
-                  });
+                  });}
             } else {
               return Padding(
                 padding: EdgeInsets.only(top: height / 2 - 100),

@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badge;
 import 'package:develop_n/screens/login_page.dart';
 import 'package:develop_n/screens/service_provider/provider_profile_screen.dart';
 import 'package:develop_n/screens/user/add_feedback.dart';
@@ -53,7 +53,7 @@ class UserDrawer extends StatelessWidget {
                     future: Services.isNotificationRead(),
                     builder: (context, snap) {
                       if (snap.hasData) {
-                        return Badge(
+                        return badge.Badge(
                             child: Icon(Icons.notifications),
                             badgeColor: snap.data as bool
                                 ? Colors.transparent

@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badge;
 import 'package:develop_n/screens/login_page.dart';
 import 'package:develop_n/screens/notifications.dart';
 import 'package:develop_n/screens/service_provider/provider_chat_list.dart';
@@ -68,7 +68,7 @@ class ServiceProviderDrawer extends StatelessWidget {
                     future: Services.isNotificationRead(),
                     builder: (context, snap) {
                       if (snap.hasData) {
-                        return Badge(
+                        return badge.Badge(
                             child: Icon(Icons.notifications),
                             badgeColor: snap.data as bool
                                 ? Colors.transparent

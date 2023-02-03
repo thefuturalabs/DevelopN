@@ -70,7 +70,7 @@ class LoginPage extends StatelessWidget {
                         return 'enter password';
                       }
                     },
-                    keyboardType: TextInputType.visiblePassword,
+                    // keyboardType: TextInputType.visiblePassword,
                     decoration: InputDecoration(
                       label: Text('password'),
                       border: OutlineInputBorder(),
@@ -103,7 +103,7 @@ class LoginPage extends StatelessWidget {
                           horizontal: 30,
                           vertical: 15,
                         ),
-                        child: Text('LOGIN'),
+                        child: Text('SignUp'),
                       ),
                     ),
                   ),

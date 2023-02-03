@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:develop_n/Constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +34,8 @@ return data.length==number;
   }
 
 static  postWithIamge({required String endPoint,required Map params,required File image}) async {
+
+  print('called multipart function');
     var request = new MultipartRequest("POST", Uri.parse(Constants.baseUrl+endPoint));
 params.entries.forEach((element) { 
   request.fields[element.key]=element.value;
@@ -43,11 +46,15 @@ params.entries.forEach((element) {
       image.path,
       // contentType: new MediaType('application', 'x-tar'),
     ));
-    request.send().then((response) async{
-      if (response.statusCode == 200) print("Uploaded!");
-      final data=await Response.fromStream(response);
-      print(data.body);
-    });
+    try {
+  request.send().then((response) async{
+    if (response.statusCode == 200) print("Uploaded!");
+    final data=await Response.fromStream(response);
+    print(data.body);
+  });
+} on Exception catch (e) {
+  Fluttertoast.showToast(msg:e.toString());
+}
   }
 
   static Future<File?> pickImage(BuildContext context) async {

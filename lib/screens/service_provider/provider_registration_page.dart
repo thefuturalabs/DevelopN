@@ -4,6 +4,7 @@ import 'package:develop_n/screens/login_page.dart';
 import 'package:develop_n/screens/user/user_home_page.dart';
 import 'package:develop_n/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ProviderRegistration extends StatefulWidget {
   ProviderRegistration({super.key});
@@ -225,12 +226,15 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
                 padding: const EdgeInsets.only(top: 30),
                 child: InkWell(
                   onTap: () {
+                   
+                    print('tapped');
                     if (fkey.currentState!.validate()) {
                       if(pickedImage==null){
-                        print('!!!!!!!!!!!!');
+                        print('image not selected');
+                        Fluttertoast.showToast(msg: 'Pick image first');
                       }else{
                         print(pickedImage!.path);
-                      }
+                      
                     Services.postWithIamge(params: {
                       'username':usernameController.text,
                       'password':passwordController.text,
@@ -241,8 +245,9 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
                       'gender':gender??'female',
                       
                       'work_status':workStatusController.text,
-                    }, endPoint: 'pro_register.php',image: pickedImage!);
+                    }, endPoint: 'pro_register.php',image: pickedImage!);}
                     }
+                   
                   },
                   onLongPress: () {
                     Navigator.push(

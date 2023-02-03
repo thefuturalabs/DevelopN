@@ -18,6 +18,9 @@ class ViewFeedBack extends StatelessWidget {
         if (snap.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator();
         } else if (snap.hasData) {
+           if (snap.data.first['message'] == 'Failed to View') {
+                return Center(child: Text('No data'));
+              } else {
           return ListView.builder(
             itemCount: snap.data.length,
             itemBuilder: (_, index) {
@@ -41,7 +44,7 @@ class ViewFeedBack extends StatelessWidget {
                 ],
               ),
             );
-          });
+          });}
         } else {
           return Center(child: Text('Something went wrong'));
         }
