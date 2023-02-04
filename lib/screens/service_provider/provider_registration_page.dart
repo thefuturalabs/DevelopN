@@ -225,7 +225,7 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
               Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: InkWell(
-                  onTap: () {
+                  onTap: () async{
                    
                     print('tapped');
                     if (fkey.currentState!.validate()) {
@@ -235,7 +235,7 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
                       }else{
                         print(pickedImage!.path);
                       
-                    Services.postWithIamge(params: {
+                 String? res= await  Services.postWithIamge(params: {
                       'username':usernameController.text,
                       'password':passwordController.text,
                       'name':nameController.text,
@@ -245,9 +245,13 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
                       'gender':gender??'female',
                       
                       'work_status':workStatusController.text,
-                    }, endPoint: 'pro_register.php',image: pickedImage!);}
+                    }, endPoint: 'pro_register.php',image: pickedImage!);
+                    if(res!.contains('registration successfull')){
+                      showDialog(context: context, builder: (_)=>AlertDialog(title: Text(''),));
+                    }
                     }
                    
+                    }
                   },
                   onLongPress: () {
                     Navigator.push(

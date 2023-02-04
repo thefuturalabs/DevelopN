@@ -33,7 +33,7 @@ return data.length==number;
     return jsonDecode(res.body);
   }
 
-static  postWithIamge({required String endPoint,required Map params,required File image}) async {
+static Future<String?> postWithIamge({required String endPoint,required Map params,required File image}) async {
 
   print('called multipart function');
     var request = new MultipartRequest("POST", Uri.parse(Constants.baseUrl+endPoint));
@@ -51,6 +51,7 @@ params.entries.forEach((element) {
     if (response.statusCode == 200) print("Uploaded!");
     final data=await Response.fromStream(response);
     print(data.body);
+    return data.body;
   });
 } on Exception catch (e) {
   Fluttertoast.showToast(msg:e.toString());
