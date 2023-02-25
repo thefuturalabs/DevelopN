@@ -103,7 +103,7 @@ class LoginPage extends StatelessWidget {
                           horizontal: 30,
                           vertical: 15,
                         ),
-                        child: Text('SignUp'),
+                        child: Text('Login'),
                       ),
                     ),
                   ),

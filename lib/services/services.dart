@@ -47,13 +47,16 @@ params.entries.forEach((element) {
       // contentType: new MediaType('application', 'x-tar'),
     ));
     try {
-  request.send().then((response) async{
+ StreamedResponse response= await request.send();
+//  .then((response) async{
+  print('waiting for response');
     if (response.statusCode == 200) print("Uploaded!");
     final data=await Response.fromStream(response);
     print(data.body);
     return data.body;
-  });
+  // });
 } on Exception catch (e) {
+  print(e);
   Fluttertoast.showToast(msg:e.toString());
 }
   }

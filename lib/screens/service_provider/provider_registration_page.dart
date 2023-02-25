@@ -225,32 +225,36 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
               Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: InkWell(
-                  onTap: () async{
-                   
+                  onTap: () async {
                     print('tapped');
                     if (fkey.currentState!.validate()) {
-                      if(pickedImage==null){
+                      if (pickedImage == null) {
                         print('image not selected');
                         Fluttertoast.showToast(msg: 'Pick image first');
-                      }else{
+                      } else {
                         print(pickedImage!.path);
-                      
-                 String? res= await  Services.postWithIamge(params: {
-                      'username':usernameController.text,
-                      'password':passwordController.text,
-                      'name':nameController.text,
-                      'email':emailController.text,
-                      'qualification':qualificationController.text,
-                      'phn_no':phoneController.text,
-                      'gender':gender??'female',
-                      
-                      'work_status':workStatusController.text,
-                    }, endPoint: 'pro_register.php',image: pickedImage!);
-                    if(res!.contains('registration successfull')){
-                      showDialog(context: context, builder: (_)=>AlertDialog(title: Text(''),));
-                    }
-                    }
-                   
+
+                        String? res = await Services.postWithIamge(params: {
+                          'username': usernameController.text,
+                          'password': passwordController.text,
+                          'name': nameController.text,
+                          'email': emailController.text,
+                          'qualification': qualificationController.text,
+                          'phn_no': phoneController.text,
+                          'gender': gender ?? 'female',
+                          'work_status': workStatusController.text,
+                        }, endPoint: 'pro_register.php', image: pickedImage!);
+                        if (res!.contains('registration successfull')) {
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                    title: Text(
+                                        'Successfully registered'),
+                                        content: Text('You need admin approval for loging in'),
+                                  ),
+                                  );
+                        }
+                      }
                     }
                   },
                   onLongPress: () {
@@ -279,12 +283,12 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
               ),
               TextButton(
                 onPressed: () {
-                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => LoginPage(),
-                      ),
-                    );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => LoginPage(),
+                    ),
+                  );
                 },
                 child: Text(
                   'Login instead',
