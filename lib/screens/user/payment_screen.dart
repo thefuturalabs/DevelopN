@@ -93,13 +93,15 @@ class PaymentScreen extends StatelessWidget {
     );
   }
 
-  requestIdea() async {
+  requestIdea(BuildContext context) async {
     String uid = await Services.getUserId() ?? '2';
     final data = await Services.postData(
         {'provider_id': providerId, 'user_id': uid, 'idea_id': ideaId},
         'add_request.php');
         if(data['result']=='Added...'){
-          Fluttertoast.showToast(msg: 'Idea requested');
+          showDialog(context: context, builder: (_)=>AlertDialog(
+            title: Text('Request submitted'),
+          ));
         }
   }
 }
