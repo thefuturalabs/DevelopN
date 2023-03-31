@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
           future: Services.getUserType(),
           builder: (context, snap) {
             // SharedPreferences.getInstance().then((value) => value.clear());
+              Services.checkConnection();
             if (!snap.hasData) {
+
               return LoginPage();
               
             } else if(snap.data=='provider'){

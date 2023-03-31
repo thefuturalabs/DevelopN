@@ -245,6 +245,7 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
                           'work_status': workStatusController.text,
                         }, endPoint: 'pro_register.php', image: pickedImage!);
                         if (res!.contains('registration successfull')) {
+                          Navigator.pop(context);
                           showDialog(
                               context: context,
                               builder: (_) => AlertDialog(

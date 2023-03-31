@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/notifications.dart';
+import '../screens/user/your_purchases.dart';
 import '../services/services.dart';
 
 class UserDrawer extends StatelessWidget {
@@ -75,6 +76,19 @@ class UserDrawer extends StatelessWidget {
                 },
                 title: Text('Feedbacks'),
                 trailing: Icon(Icons.feedback),
+              ),
+            ),
+             Card(
+              child: ListTile(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => YourPurchases(),
+                    ),
+                  );
+                },
+                title: Text('Your purchases'),
+                trailing: Icon(Icons.shopping_cart),
               ),
             ),
             Card(

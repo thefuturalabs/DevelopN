@@ -69,7 +69,7 @@ class PaymentScreen extends StatelessWidget {
                                     );
                                     Future.delayed(Duration(seconds: 5))
                                         .then((value) {
-                                      requestIdea();
+                                      requestIdea(context);
                                     });
                                   },
                                   child: Text('Submit'),

@@ -53,8 +53,8 @@ class _UserChatPageState extends State<UserChatPage> {
 
   getUserBio() async {
     final data = await Services.postData(
-      {'user_id': widget.recieverId},
-      'user_profile_view.php',
+      {'provider_id': widget.recieverId},
+      'profile_view.php',
     );
     print(data);
     setState(() {
@@ -96,7 +96,7 @@ class _UserChatPageState extends State<UserChatPage> {
             },
             child: CircleAvatar(
               
-              backgroundImage:userData!=null? NetworkImage(userData!['dp']):null,
+              backgroundImage:userData!=null? NetworkImage(userData!['image']):null,
             ),
           ),
         ),

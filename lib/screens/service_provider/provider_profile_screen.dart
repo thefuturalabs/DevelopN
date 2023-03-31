@@ -4,6 +4,9 @@ import 'package:develop_n/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../Constants/constants.dart';
+
+
 class ProviderProfilePage extends StatefulWidget {
   ProviderProfilePage({super.key});
 
@@ -19,6 +22,8 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
   TextEditingController genderController = TextEditingController();
   TextEditingController workStatusController = TextEditingController();
 
+  String? imageUrl;
+
   getProfileData() async {
     String uid = await Services.getUserId() ?? '2';
     Map data =
@@ -27,12 +32,15 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
     emailController.text = data['email'];
     phoneController.text = data['phn_no'];
     qualificationController.text = data['qualification'];
+    setState(() {
+      imageUrl = data['image'];
+    });
     workStatusController.text = data['work_status'];
   }
 
   updateProfile() async {
     String uid = await Services.getUserId() ?? '2';
-   var data=await Services.postData({
+    var data = await Services.postData({
       'provider_id': uid,
       'name': nameController.text,
       'email': emailController.text,
@@ -40,7 +48,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
       'qualification': qualificationController.text,
       'work_status': workStatusController.text,
     }, 'update_profile.php');
-    if(data['message']=='updated'){
+    if (data['message'] == 'updated') {
       Fluttertoast.showToast(msg: 'Updated successfully');
       Navigator.pop(context);
     }
@@ -61,6 +69,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
           padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Your profile',
@@ -71,6 +80,18 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                   ),
                 ),
                 SizedBox(height: 60),
+                if (imageUrl != null)
+                  InkWell(
+                    onTap: (){
+                      Fluttertoast.showToast(msg: 'profile image cannot be changed');
+                    },
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage:
+                          NetworkImage(Constants.baseImageUrl + imageUrl!),
+                    ),
+                  ),
+                 
                 TextFormField(
                   controller: nameController,
                   // initialValue: 'password',
@@ -197,22 +218,25 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                     border: InputBorder.none,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: InkWell(
-                    onTap: updateProfile,
-                    child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Color.fromARGB(255, 97, 123, 144),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 30,
-                          vertical: 15,
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: InkWell(
+                      onTap: updateProfile,
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color.fromARGB(255, 97, 123, 144),
                         ),
-                        child: Text('Update'),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 30,
+                            vertical: 15,
+                          ),
+                          child: Text('Update'),
+                        ),
                       ),
                     ),
                   ),
