@@ -4,7 +4,7 @@ include '../Login_v1/connection.php';
 
 $provider_id = $_POST['provider_id'];
 
-$sql = mysqli_query($con, "SELECT * FROM chat join user on chat.user_id = user.login_id where provider_id='$provider_id'");
+$sql = mysqli_query($con, "SELECT DISTINCT user.name, user.login_id as user_id FROM chat join user on chat.user_id = user.login_id where provider_id='$provider_id'");
 $list = array();
 
 if ($sql->num_rows > 0) {

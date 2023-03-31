@@ -10,6 +10,7 @@ $myarray['phn_no'] = $row['phn_no'];
 $myarray['qualification'] = $row['qualification'];
 $myarray['gender'] = $row['gender'];
 $myarray['work_status'] = $row['work_status'];
+$myarray['image'] = $row['image'];
 
 echo json_encode($myarray);
 ?>

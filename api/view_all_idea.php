@@ -15,7 +15,7 @@ if ($sql->num_rows > 0) {
     $myarray['idea'] = $row['idea'];
     $myarray['idea_id'] = $row['idea_id'];
     $myarray['price'] = $row['price'];
-
+    $myarray['category'] = $row['category'];
 
 
     array_push($list, $myarray);

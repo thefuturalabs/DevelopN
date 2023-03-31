@@ -14,7 +14,7 @@ if ($sql->num_rows > 0) {
 
     $myarray['message'] = 'User Successfully LoggedIn';
 
-    $myarray['patient_id'] = $row['login_id'];
+    $myarray['patient_id'] = $row['provider_id'];
 
     $myarray['type'] = $row['type'];
   }
