@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:develop_n/Constants/constants.dart';
 import 'package:develop_n/services/services.dart';
 import 'package:flutter/material.dart';
 
@@ -96,7 +97,7 @@ class _UserChatPageState extends State<UserChatPage> {
             },
             child: CircleAvatar(
               
-              backgroundImage:userData!=null? NetworkImage(userData!['image']):null,
+              backgroundImage:userData!=null? NetworkImage(Constants.baseImageUrl+ userData!['image']):null,
             ),
           ),
         ),

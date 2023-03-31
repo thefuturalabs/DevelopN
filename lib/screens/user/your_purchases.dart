@@ -22,30 +22,38 @@ class YourPurchases extends StatelessWidget {
           if (snap.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator();
           } else if (snap.hasData) {
-            return ListView.builder(
-              itemCount: snap.data.length,
-              itemBuilder: (_, index) {
-                return Card(
-                  child: ListTile(
-                    onTap: snap.data[index]['status'] == '1'?() {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => ViewIdea(
-                                  data: snap.data[index],
-                                  byUser: true,
-                                  restrictedView: false)));
-                    }:null,
-                    title: Text(snap.data[index]['title']),
-                    trailing: Text(
-                      snap.data[index]['status'] == '1'
-                          ? 'purchased':snap.data[index]['status'] == '0'?
-                           'purchase pending':'rejected',
+            if (snap.data.first['message'] == 'Failed to View') {
+              return Center(child: Text('No data'));
+            } else {
+              return ListView.builder(
+                itemCount: snap.data.length,
+                itemBuilder: (_, index) {
+                  return Card(
+                    child: ListTile(
+                      onTap: snap.data[index]['status'] == '1'
+                          ? () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => ViewIdea(
+                                          data: snap.data[index],
+                                          byUser: true,
+                                          restrictedView: false)));
+                            }
+                          : null,
+                      title: Text(snap.data[index]['title']),
+                      trailing: Text(
+                        snap.data[index]['status'] == '1'
+                            ? 'purchased'
+                            : snap.data[index]['status'] == '0'
+                                ? 'purchase pending'
+                                : 'rejected',
+                      ),
                     ),
-                  ),
-                );
-              },
-            );
+                  );
+                },
+              );
+            }
           } else {
             return Center(
               child: Text('No data'),
