@@ -2,14 +2,14 @@ import 'package:develop_n/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class ProviderProfilePage extends StatefulWidget {
-  ProviderProfilePage({super.key});
+class UserProfilePage extends StatefulWidget {
+  UserProfilePage({super.key});
 
   @override
-  State<ProviderProfilePage> createState() => _ProviderProfilePageState();
+  State<UserProfilePage> createState() => _ProviderProfilePageState();
 }
 
-class _ProviderProfilePageState extends State<ProviderProfilePage> {
+class _ProviderProfilePageState extends State<UserProfilePage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();

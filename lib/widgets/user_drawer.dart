@@ -2,6 +2,7 @@ import 'package:badges/badges.dart' as badge;
 import 'package:develop_n/screens/login_page.dart';
 import 'package:develop_n/screens/service_provider/provider_profile_screen.dart';
 import 'package:develop_n/screens/user/add_feedback.dart';
+import 'package:develop_n/screens/user/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,7 +30,7 @@ class UserDrawer extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => ProviderProfilePage()));
+                            builder: (_) => UserProfilePage()));
                   },
                   child: Text(
                     'Manage Profile',

@@ -88,7 +88,7 @@ class _UserChatPageState extends State<UserChatPage> {
                   children:[
                     Text('name   : ${userData!['name']}'),
                     Text('email   : ${userData!['email']}'),
-                    Text('mobile: ${userData!['mobile']}'),
+                    Text('mobile: ${userData!['phn_no']}'),
                   ]
                   //  userData!.entries.map((e) => Text('${e.key}: ${e.value}'),).toList(),
                 ),

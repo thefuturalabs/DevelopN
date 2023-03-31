@@ -127,7 +127,7 @@ class ViewIdea extends StatelessWidget {
                     SizedBox(
                       width: 20,
                     ),
-                    if (byUser)
+                    if (byUser && restrictedView)
                       ElevatedButton(
                         onPressed: () async {
                           Navigator.of(context).push(
